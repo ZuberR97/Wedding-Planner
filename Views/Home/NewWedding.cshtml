@@ -1,0 +1,31 @@
+@using Wedding_Planner.Models
+@model Wedding
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>New Wedding</title>
+    </head>
+    <body>
+        <h1>Plan Your Wedding</h1>
+        <a href="/UserPage/@ViewBag.loggedin">Dashboard</a>
+        <a href="logout">Logout</a>
+        <form asp-action="CreateNew" asp-controller="Home" method="post">
+            <span asp-validation-for="Wedder1"></span>
+            <p>Wedder One:</p>
+            <input asp-for="Wedder1">
+            <span asp-validation-for="Wedder2"></span>
+            <p>Wedder Two:</p>
+            <input asp-for="Wedder2">
+            <span asp-validation-for="Date"></span>
+            <p>Date:</p>
+            <input asp-for="Date">
+            <span asp-validation-for="Address"></span>
+            <p>Wedding Address:</p>
+            <input asp-for="Address">
+            <input asp-for="UserId" type="hidden" value="@ViewBag.loggedin">
+            <input type="submit" value="Create">
+        </form>
+    </body>
+</html>

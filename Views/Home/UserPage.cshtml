@@ -1,0 +1,77 @@
+@using Wedding_Planner.Models
+@model List<Wedding>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Dashboard</title>
+    </head>
+    <body>
+        <h1>Welcome to the Wedding Planner</h1>
+        <a href="/logout">Logout</a>
+        <table>
+            <tr>
+                <th style="width:200px;">Wedding</th>
+                <th style="width:200px;">Date</th>
+                <th style="width:100px;">Guests</th>
+                <th style="width:100px;">Action</th>
+            </tr>
+            @{
+                if(@Model == null || !@Model.Any())
+                {
+                    <tr>
+                        <td>Make a new wedding!</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach(Wedding uw in Model)
+                    {
+                        if(@uw.UserId == @ViewBag.loggedin)
+                        {
+                            <tr>
+                                <td><a href="/viewwedding/@uw.WeddingId">@uw.Wedder1 & @uw.Wedder2</a></td>
+                                <td>@uw.Date</td>
+                                <td>@uw.TheseUsers.Count</td>
+                                <td><a href="/delete/@uw.WeddingId">Delete</a></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            bool attending = false;
+                            
+                            foreach(UserWedding join in uw.TheseUsers)
+                            {
+                                if(join.UserId == @ViewBag.loggedin)
+                                {
+                                    attending = true;
+                                }
+                            }
+                            if(attending)
+                            {
+                                <tr>
+                                    <td><a href="/viewwedding/@uw.WeddingId">@uw.Wedder1 & @uw.Wedder2</a></td>
+                                    <td>@uw.Date</td>
+                                    <td>@uw.TheseUsers.Count</td>
+                                    <td><a href="/unrsvp/@uw.WeddingId">Un-RSVP</a></td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td><a href="/viewwedding/@uw.WeddingId">@uw.Wedder1 & @uw.Wedder2</a></td>
+                                    <td>@uw.Date</td>
+                                    <td>@uw.TheseUsers.Count</td>
+                                    <td><a href="/rsvp/@uw.WeddingId">RSVP</a></td>
+                                </tr>
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        </table>
+        <button><a href="/newwedding/@ViewBag.loggedin">New Wedding</a></button>
+    </body>
+</html>

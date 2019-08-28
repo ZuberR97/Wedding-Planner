@@ -1,0 +1,25 @@
+@using Wedding_Planner.Models
+@model Wedding
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Wedding</title>
+    </head>
+    <body>
+        <h1>@Model.Wedder1 and @Model.Wedder2's Wedding</h1>
+        <a href="/UserPage/@ViewBag.loggedin">Dashboard</a>
+        <a href="/logout">Logout</a>
+        <h3>Date: @Model.Date</h3>
+        <h3>Guests:</h3>
+        <ul>
+            @{
+                foreach(UserWedding uw in @Model.TheseUsers)
+                {
+                    <li>@uw.User.FirstName @uw.User.LastName</li>
+                }
+            }
+        </ul>
+    </body>
+</html>

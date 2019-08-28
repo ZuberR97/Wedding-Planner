@@ -1,0 +1,39 @@
+﻿@using Wedding_Planner.Models
+@model User
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Wedding Planner</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="regbox">
+                <h3>Register</h3>
+                <form asp-action="Register" asp-controller="Home" method="post">
+                    <span asp-validation-for="FirstName"></span>
+                    <p>First Name:</p>
+                    <input asp-for="FirstName"><br>
+                    <span asp-validation-for="LastName"></span>
+                    <p>Last Name:</p>
+                    <input asp-for="LastName"><br>
+                    <span asp-validation-for="Email"></span>
+                    <p>Email:</p>
+                    <input asp-for="Email"><br>
+                    <span asp-validation-for="Password"></span>
+                    <p>Password:</p>
+                    <input asp-for="Password">
+                    <span asp-validation-for="Confirm"></span>
+                    <p>Confirm:</p>
+                    <input asp-for="Confirm"><br>
+                    <input class="regboxsubmit" type="submit" value="Register">
+                </form>
+            </div>
+            <div class="regbox">
+                <partial name="IndexPartial">
+            </div>
+        </div>
+        
+    </body>
+</html>
